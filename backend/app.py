@@ -55,7 +55,7 @@ def create_produto():
     if not dados or not 'nome' in dados or not 'preco' in dados:
         return jsonify({'mensagem': 'Dados inválidos'}), 400
     nome = dados['nome']
-    preco = dados ['preco']
+    preco = dados['preco']
     novo_produto = Produto(nome=nome, preco=preco)
     db.session.add(novo_produto)
     db.session.commit()
