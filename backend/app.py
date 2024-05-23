@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banco.db'
 db = SQLAlchemy(app)
 
 # Configure o CORS
-CORS(app, origins=['http://127.0.0.1:5500']) 
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Classe que representa entidade no banco de dados: Produto
 class Produto(db.Model):
@@ -52,8 +52,10 @@ def get_produto(produto_id):
 @app.route('/produtos', methods=['POST'])
 def create_produto():
     dados = request.get_json()
+    if not dados or not 'nome' in dados or not 'preco' in dados:
+        return jsonify({'mensagem': 'Dados inválidos'}), 400
     nome = dados['nome']
-    preco = dados['preco']
+    preco = dados ['preco']
     novo_produto = Produto(nome=nome, preco=preco)
     db.session.add(novo_produto)
     db.session.commit()
@@ -66,6 +68,8 @@ def update_produto(produto_id):
     produto = Produto.query.get(produto_id)
     if produto is None:
         return jsonify({'mensagem': 'Produto não encontrado'}), 404
+    if not dados or not 'nome' in dados or not 'preco' in dados:
+        return jsonify({'mensagem': 'Dados inválidos'}), 400
     produto.nome = dados['nome']
     produto.preco = dados['preco']
     db.session.commit()

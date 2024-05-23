@@ -118,8 +118,7 @@ export const TableCell = styled.td`
 `;
 
 export const ButtonAction = styled.button`
-  margin-right: 50px;
-  margin-left: 50px;
+  margin: 0 50px 5px;
   width: 120px;
   background-color: #8caccd;
   color: white;
