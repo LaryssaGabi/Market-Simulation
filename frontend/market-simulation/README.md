@@ -54,3 +54,8 @@ Substitua <produto_id> pelo ID do produto que você quer deletar (por exemplo, 1
 ```bash
 Invoke-RestMethod -Uri http://127.0.0.1:5000/produtos/1 -Method Delete
 ```
+
+# Rodar 
+
+* venv\Scripts\activate
+* python app.py
